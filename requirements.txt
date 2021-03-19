@@ -1,0 +1,7 @@
+requests
+sqlite3
+flask
+flask-wtf
+wtforms
+arrow
+os
