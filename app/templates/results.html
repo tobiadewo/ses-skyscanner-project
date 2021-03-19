@@ -19,6 +19,12 @@
                 {{ sorter.Submission() }}<br>
             </p>
         </form>
+        <!-- This displays the number of quotes at the top of the page.-->
+        {% if quotes|length == 1 %}
+            <p style = "text-align: center;"><b>1 quote found</b></p>
+        {% else %}
+            <p style = "text-align: center;"><b>{{ quotes|length }} quotes found</b></p>
+        {% endif %}
         <!-- This creates a centered table of quotes. The headers are predetermined.-->
         <table style = "margin-left: auto; margin-right: auto">
             <tr>
