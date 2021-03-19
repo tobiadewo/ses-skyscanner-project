@@ -1,0 +1,37 @@
+* {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 20px;
+    text-align: center;
+}
+
+th {
+    position: sticky;
+    top: 0;
+    background-color: darkslategray;
+}
+
+tr:hover {
+    background-color:#436e6e;
+}
+
+div {
+    background-color:darkslategray;
+    text-align: center;
+}
+
+h1 {
+    text-align: center;
+    color: white;
+}
+
+body {
+    background-color:slategrey;
+}

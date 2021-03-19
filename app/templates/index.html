@@ -1,0 +1,36 @@
+{% extends "header.html" %} <!-- This line means that this file is a copy of header.html, with the contents of
+the block below replacing the "{% block content %}{% endblock %}" line in header.html.-->
+
+{% block content %}
+	<!-- This creates a form based on SearchForm() in forms.py that allows a user to input search terms.-->
+    <form action="{{ url_for('results') }}" method = "POST">
+		<p style = "text-align: center;">
+			{{ form.Currency.label }}<br>
+			{{ form.Currency(size = 30) }}<br>
+		</p>
+		<p style = "text-align: center;">
+			{{ form.Origin.label }}<br>
+			{{ form.Origin(size = 30) }}<br>
+		</p>
+		<p style = "text-align: center;">
+			{{ form.Destination.label }}<br>
+			{{ form.Destination(size = 30) }}<br>
+		</p>
+		<p style = "text-align: center;">
+			{{ form.OutboundDate.label }}<br>
+			{{ form.OutboundDate(size = 30) }}<br>
+			<i style = "color: silver;">accepted formats:<br>YYYY-MM-DD, YYYY-MM, YYYY, "anytime"</i><br>
+		</p>
+		<p style = "text-align: center;">
+			{{ form.InboundDate.label }}<br>
+			{{ form.InboundDate(size = 30) }}<br>
+			<i style = "color: silver;">accepted formats:<br>YYYY-MM-DD, YYYY-MM, YYYY, "anytime"</i><br>
+			<i style = "color: silver;">(leave this blank for a one-way trip)</i><br>
+		</p>
+		<p style = "text-align: center;">
+			<!-- This represents the submission button; once it is pressed, 
+				the data in the form is sent back to the server-->
+			{{ form.Submission() }}
+		</p>
+    </form>
+{% endblock %}

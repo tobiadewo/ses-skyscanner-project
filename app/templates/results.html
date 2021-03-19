@@ -1,0 +1,66 @@
+{% extends "header.html" %}
+
+{% block content %}
+    <!-- This checks if a full list of quotes has been passed. If not, it means the search terms
+    input by the user led to an invalid URL.-->
+    {% if quotes is not defined or quotes == [] %}
+        <p style="color: red; text-align: center; "><b>No flights matching the search criteria were found.</b></p>
+    {% else %}
+        <!-- This creates a dropdown box according to ResultSortSelect in forms.py, allowing
+        users to choose from a list of options by which to sort the table of quotes-->
+        <form action="{{ url_for('results_sorted') }}" method = "POST">    
+            <p style = "text-align: center;">
+                {{ sorter.Sorting.label }}<br>
+            </p>
+            <p style = "text-align: center;">
+                {{ sorter.Sorting }}<br>
+            </p>
+            <p style = "text-align: center;">
+                {{ sorter.Submission() }}<br>
+            </p>
+        </form>
+        <!-- This creates a centered table of quotes. The headers are predetermined.-->
+        <table style = "margin-left: auto; margin-right: auto">
+            <tr>
+                <th>Quote ID</th>
+                <th>Minimum Price in {{ currency }}</th>
+                <th>Direct Flight?</th>
+                <th>Route</th>
+                <th>Outbound Date</th>
+                <th>Inbound Date</th>
+                <th>Last verified</th>
+            </tr>
+            <!-- This loop creates a table row for each quote in the list of quotes.-->
+            {% for quote in quotes %}
+                <tr>
+                    <td>{{ quote["QuoteId"] }}</td>
+                    <td>{{ quote["MinPrice"] }}</td>
+                    {% if quote["Direct"] %}
+                        <td>Yes</td>
+                    {% else %}
+                        <td>No</td>
+                    {% endif %}
+                    <!-- This checks if the flight is a round trip or one-way, and changes the symbol used in
+                    the 'Route' column accordingly.-->
+                    {% if "InboundLeg" in quote.keys() %}
+                        {% set symbol = "⇄" %}
+                    {% else %}
+                        {% set symbol = "→" %}
+                    {% endif %}
+                    <td>{{ quote["OutboundLeg"]["Origin"] }} {{ symbol }} {{ quote["OutboundLeg"]["Destination"] }}<br> via {{ quote["OutboundLeg"]["Carriers"][0] }} </td>
+                    <!-- This uses arrow, a library for handling dates and times, to format the outbound and inbound dates.-->
+                    <td>{{ arrow.get(quote["OutboundLeg"]["DepartureDate"]).format("YYYY-MM-DD") }}</td>
+                    {% if "InboundLeg" in quote.keys() %}
+                        <td>{{ arrow.get(quote["InboundLeg"]["DepartureDate"]).format("YYYY-MM-DD") }}</td>
+                    {% else %}
+                        <td>N/A</td>
+                    {% endif %}
+                    <!-- This uses arrow to display the last time the information was verified relative to the current time.-->
+                    <td>{{ arrow.get(quote["QuoteDateTime"]).humanize() }}</td> 
+                </tr>
+            {% endfor %}
+        </table>
+    {% endif %}
+    <!-- This returns the user to /index.-->
+    <p style = "text-align: center;">Click <a href="{{ url_for('index') }}">here</a> to search again.</p>
+{% endblock %}

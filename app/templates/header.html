@@ -1,0 +1,19 @@
+<html>
+    <head>
+        <!-- These lines use the Jinja2 library to execute code within HTML documents.
+        Here, url_for() links to the webpage connected to a function in routes.py, to avoid issues
+        if the name of any webpage is changed. -->
+        <!-- These lines initialize the stylesheet, favicon and title for the webpages.-->
+        <link rel = "stylesheet" href = "{{ url_for('static', filename='style.css') }}">
+        <link rel = "shortcut icon" href = "{{ url_for('static', filename='favicon.ico') }}">
+        <title>Flight Finder</title>
+    </head>
+    <body>
+        <!-- This represents a header at the top of the webpages.-->
+        <div>
+            <h1>Flight Finder<br>(brought to you by Skyscanner API)</h1>
+        </div>
+    </body>
+    <!-- This allows other .html files to copy the contents of the file outside of the block.-->
+    {% block content %}{% endblock %}
+</html>
