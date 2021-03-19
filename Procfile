@@ -1,1 +1,1 @@
-web: gunicorn app:flightfinder
+web: gunicorn flightfinder:app
