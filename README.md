@@ -6,5 +6,7 @@ This project works by taking user input to make API calls to Skyscanner, a trave
 
 The Skyscanner API has been deprecated since the creation of this project, and so it no longer functions, but I plan to find a suitable replacement API in the near future.
 
+## How to run
+
 ## Screenshots
 ![image](https://github.com/user-attachments/assets/90df660a-973b-462d-ba32-0edede37874d)
